@@ -1,0 +1,18 @@
+script ~/initial_$(date "+%Y%m%dT%H%M%S")
+env | grep -i shell
+ls -alh
+env
+source ~/.bashrc
+yum install aide
+aide --init
+cp /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.$(date "+%Y%m%dT%H%M%S").gz
+mv /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
+cp /etc/aide.conf /etc/aide.conf.$(date "+%Y%m%dT%H%M%S")
+yum -y update
+yum -y upgrade
+echo "01 07 * * * root /usr/sbin/aide --check" >> /etc/crontab
+aide --check
+aide --update
+echo "shutdown -r now"
+exit
+shutdown -r now
