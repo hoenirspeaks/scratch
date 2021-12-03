@@ -1,0 +1,10 @@
+script ~/initial_$(date "+%Y%m%dT%H%M%S")
+env | grep -i shell
+ls -alh
+env
+source ~/.bashrc
+yum install aide
+aide --init
+cp /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.$(date "+%Y%m%dT%H%M%S").gz
+mv /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
+cp /etc/aide.conf /etc/aide.conf.$(date "+%Y%m%dT%H%M%S")
