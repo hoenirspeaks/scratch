@@ -13,3 +13,6 @@ yum upgrade
 aide --check
 aide --update
 echo "01 07 * * * root /usr/sbin/aide --check" >> /etc/crontab
+echo "shutdown -r now"
+exit
+shutdown -r now
